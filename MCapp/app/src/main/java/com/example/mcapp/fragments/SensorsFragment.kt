@@ -22,8 +22,9 @@ import kotlin.math.roundToInt
 
 class SensorsFragment : Fragment(){
 
-//    private lateinit var sensorManager: SensorManager
-//    private var sensor: Sensor? = null
+    private lateinit var sensorManager: SensorManager
+    private var sensor: Sensor? = null
+    private lateinit var  sensorEventListener:  SensorEventListener
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,10 +33,10 @@ class SensorsFragment : Fragment(){
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_sensors, container, false)
 
-        val sensorManager = view.context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        val sensor: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY)
+        sensorManager = view.context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY)
 
-        val sensorEventListener = object : SensorEventListener{
+        sensorEventListener = object : SensorEventListener{
             override fun onSensorChanged(event: SensorEvent?) {
                 if (event != null) {
                     var v1: Float =  event.values[0]
@@ -65,22 +66,14 @@ class SensorsFragment : Fragment(){
 
         sensorManager.registerListener( sensorEventListener, sensor, 10000 )
 
-        view.tvinfo.setOnClickListener {
-            //findNavController().navigate( R.id.action_sensorsFragment_to_listFragment )
-            sensorManager.unregisterListener( sensorEventListener, sensor )
-            findNavController().popBackStack()
-        }
-
-        requireActivity().onBackPressedDispatcher.addCallback(this) {
-            sensorManager.unregisterListener( sensorEventListener, sensor )
-            findNavController().popBackStack()
-        }
-
-
         return view
     }
 
+    override fun onStop() {
 
+        sensorManager.unregisterListener( sensorEventListener, sensor )
+        super.onStop()
 
+    }
 
 }
