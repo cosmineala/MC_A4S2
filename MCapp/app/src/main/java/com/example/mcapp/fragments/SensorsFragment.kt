@@ -12,8 +12,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.navigation.fragment.findNavController
 import com.example.mcapp.R
 import kotlinx.android.synthetic.main.fragment_sensors.*
+import kotlinx.android.synthetic.main.fragment_sensors.view.*
 import kotlin.math.roundToInt
 
 
@@ -34,6 +36,10 @@ class SensorsFragment : Fragment(), SensorEventListener {
 
         sensorManager.registerListener( this, sensor, 10000 )
 
+        view.tvinfo.setOnClickListener {
+            findNavController().navigate( R.id.action_sensorsFragment_to_listFragment )
+            //findNavController()
+        }
 
 
         return view

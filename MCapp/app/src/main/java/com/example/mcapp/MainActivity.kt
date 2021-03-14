@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) // TODO -> Disables screen Totation
 
         // MC Homework 1 done
-        setupActionBarWithNavController( findNavController(R.id.fragment) )
+       setupActionBarWithNavController( findNavController(R.id.fragment) )
     }
 
 

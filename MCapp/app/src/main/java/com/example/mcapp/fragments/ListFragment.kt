@@ -21,15 +21,16 @@ class ListFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_list, container, false)
 
         view.sensor_icon.setOnClickListener {
-            findNavController().navigate( R.id.action_listFragment_to_sensorsFragment2 )
+//            findNavController().navigate( R.id.action_listFragment_to_sensorsFragment2 )
+            findNavController().navigate(R.id.action_listFragment_to_sensorsFragment)
         }
-
-
-
-
 
         // Inflate the layout for this fragment
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
 

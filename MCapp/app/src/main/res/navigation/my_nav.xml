@@ -11,7 +11,7 @@
         android:label="Sensors"
         tools:layout="@layout/fragment_sensors" >
         <action
-            android:id="@+id/action_sensorsFragment2_to_listFragment"
+            android:id="@+id/action_sensorsFragment_to_listFragment"
             app:destination="@id/listFragment" />
     </fragment>
     <fragment
@@ -20,7 +20,7 @@
         android:label="List"
         tools:layout="@layout/fragment_list" >
         <action
-            android:id="@+id/action_listFragment_to_sensorsFragment2"
+            android:id="@+id/action_listFragment_to_sensorsFragment"
             app:destination="@id/sensorsFragment" />
     </fragment>
 </navigation>
