@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.navigation.fragment.findNavController
 import com.example.mcapp.R
@@ -19,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_sensors.view.*
 import kotlin.math.roundToInt
 
 
-class SensorsFragment : Fragment(), SensorEventListener {
+class SensorsFragment : Fragment(){
 
 //    private lateinit var sensorManager: SensorManager
 //    private var sensor: Sensor? = null
@@ -34,44 +35,52 @@ class SensorsFragment : Fragment(), SensorEventListener {
         val sensorManager = view.context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
         val sensor: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY)
 
-        sensorManager.registerListener( this, sensor, 10000 )
+        val sensorEventListener = object : SensorEventListener{
+            override fun onSensorChanged(event: SensorEvent?) {
+                if (event != null) {
+                    var v1: Float =  event.values[0]
+                    var v2: Float =  event.values[1]
+                    var v3: Float =  event.values[2]
+
+                    v1 = v1 * 10 / 2 + 50
+                    v2 = v2 * 10 / 2 + 50
+                    v3 = v3 * 10 / 2 + 50
+
+                    val pro1 : Int = v1.toInt()
+                    val pro2 : Int = v2.toInt()
+                    val pro3 : Int = v3.toInt()
+
+                    val textval = pro1.toString() + " : " + pro2 + " : " + pro3
+                    tvinfo.text = textval
+
+                    pb1.progress = pro1
+                    pb2.progress = pro2
+                    pb3.progress = pro3
+                }
+            }
+            override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+                // NOTE Empty but requared method
+            }
+        }
+
+        sensorManager.registerListener( sensorEventListener, sensor, 10000 )
 
         view.tvinfo.setOnClickListener {
-            findNavController().navigate( R.id.action_sensorsFragment_to_listFragment )
-            //findNavController()
+            //findNavController().navigate( R.id.action_sensorsFragment_to_listFragment )
+            sensorManager.unregisterListener( sensorEventListener, sensor )
+            findNavController().popBackStack()
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            sensorManager.unregisterListener( sensorEventListener, sensor )
+            findNavController().popBackStack()
         }
 
 
         return view
     }
 
-    override fun onSensorChanged(event: SensorEvent?) {
 
-        if (event != null) {
 
-            var v1: Float =  event.values[0]
-            var v2: Float =  event.values[1]
-            var v3: Float =  event.values[2]
 
-            v1 = v1 * 10 / 2 + 50
-            v2 = v2 * 10 / 2 + 50
-            v3 = v3 * 10 / 2 + 50
-
-            val pro1 : Int = v1.toInt()
-            val pro2 : Int = v2.toInt()
-            val pro3 : Int = v3.toInt()
-
-            val textval = pro1.toString() + " : " + pro2 + " : " + pro3
-            tvinfo.text = textval
-
-            pb1.progress = pro1
-            pb2.progress = pro2
-            pb3.progress = pro3
-
-        }
-    }
-
-    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-
-    }
 }
