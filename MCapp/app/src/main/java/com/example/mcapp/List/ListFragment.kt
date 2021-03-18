@@ -1,4 +1,4 @@
-package com.example.mcapp.fragments
+package com.example.mcapp.List
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

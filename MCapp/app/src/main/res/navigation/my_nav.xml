@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/sensorsFragment"
-        android:name="com.example.mcapp.fragments.SensorsFragment"
+        android:name="com.example.mcapp.Sensors.SensorsFragment"
         android:label="Sensors"
         tools:layout="@layout/fragment_sensors" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.example.mcapp.fragments.ListFragment"
+        android:name="com.example.mcapp.List.ListFragment"
         android:label="List"
         tools:layout="@layout/fragment_list" >
         <action

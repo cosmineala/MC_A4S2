@@ -1,4 +1,4 @@
-package com.example.mcapp.fragments
+package com.example.mcapp.Sensors
 
 import android.content.Context
 import android.hardware.Sensor
