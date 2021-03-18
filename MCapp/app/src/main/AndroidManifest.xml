@@ -19,6 +19,7 @@
         </activity>
     </application>
 
+<!-- NOTE Sensors permissions-->
     <uses-feature
         android:name="android.hardware.sensor.gyroscope"
         android:required="true"
@@ -28,7 +29,17 @@
         android:name="android.hardware.sensor.accelerometer"
         android:required="true"
         tools:ignore="ManifestOrder" />
+<!--ENDNOTE-->
+
 
     <uses-feature android:name="android.hardware.screen.portrait" />
+
+<!-- NOTE Camera Permissions -->
+    <!-- Declare features -->
+    <uses-feature android:name="android.hardware.camera" />
+
+    <!-- Declare permissions -->
+    <uses-permission android:name="android.permission.CAMERA" />
+<!--ENDNOTE-->
 
 </manifest>
