@@ -36,11 +36,8 @@ class SensorsFragment : Fragment(){
         sensorManager = view.context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY)
 
-
         sensorEventListener = sensorEventListenerCode
         sensorManager.registerListener( sensorEventListener, sensor, 10000 )
-
-
 
         return view
     }
