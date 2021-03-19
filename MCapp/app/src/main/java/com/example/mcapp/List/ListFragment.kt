@@ -25,6 +25,10 @@ class ListFragment : Fragment() {
             findNavController().navigate(R.id.action_listFragment_to_sensorsFragment)
         }
 
+        view.camera_icon.setOnClickListener {
+            findNavController().navigate(R.id.action_listFragment_to_cameraFragment)
+        }
+
         // Inflate the layout for this fragment
         return view
     }
