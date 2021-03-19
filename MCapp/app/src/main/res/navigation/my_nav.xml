@@ -22,5 +22,17 @@
         <action
             android:id="@+id/action_listFragment_to_sensorsFragment"
             app:destination="@id/sensorsFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.example.mcapp.CameraFragment"
+        android:label="fragment_camera"
+        tools:layout="@layout/fragment_camera" >
+        <action
+            android:id="@+id/action_cameraFragment_to_listFragment"
+            app:destination="@id/listFragment" />
     </fragment>
 </navigation>
