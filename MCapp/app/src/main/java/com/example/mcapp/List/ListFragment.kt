@@ -26,7 +26,7 @@ class ListFragment : Fragment() {
         }
 
         view.camera_icon.setOnClickListener {
-            findNavController().navigate(R.id.action_listFragment_to_cameraFragment)
+            //findNavController().navigate(R.id.)
         }
 
         // Inflate the layout for this fragment
