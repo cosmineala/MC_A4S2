@@ -26,7 +26,7 @@ class ListFragment : Fragment() {
         }
 
         view.camera_icon.setOnClickListener {
-            //findNavController().navigate(R.id.)
+            findNavController().navigate(R.id.action_listFragment_to_cameraPermissionsFragment)
         }
 
         // Inflate the layout for this fragment

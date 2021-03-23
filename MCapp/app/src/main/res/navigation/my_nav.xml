@@ -22,5 +22,13 @@
         <action
             android:id="@+id/action_listFragment_to_sensorsFragment"
             app:destination="@id/sensorsFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_cameraPermissionsFragment"
+            app:destination="@id/cameraPermissionsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/cameraPermissionsFragment"
+        android:name="com.example.mcapp.MyCameraX.CameraPermissionsFragment"
+        android:label="fragment_camera_permissions"
+        tools:layout="@layout/fragment_camera_permissions" />
 </navigation>
