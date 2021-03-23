@@ -30,5 +30,18 @@
         android:id="@+id/cameraPermissionsFragment"
         android:name="com.example.mcapp.MyCameraX.CameraPermissionsFragment"
         android:label="fragment_camera_permissions"
-        tools:layout="@layout/fragment_camera_permissions" />
+        tools:layout="@layout/fragment_camera_permissions" >
+        <action
+            android:id="@+id/action_cameraPermissionsFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.example.mcapp.MyCameraX.CameraFragment"
+        android:label="fragment_camera"
+        tools:layout="@layout/fragment_camera" >
+        <action
+            android:id="@+id/action_cameraFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
 </navigation>
