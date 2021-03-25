@@ -23,13 +23,35 @@ class CameraPermissionsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+//        if( NEXT_SCREEN == NEXT_LIST ){
+//            NEXT_SCREEN = NEXT_CAMERA
+//            findNavController().navigate(R.id.action_cameraPermissionsFragment_to_listFragment);
+//            return;
+//        }
+
         if (!hasPermissions(requireContext())) {
             // Request camera-related permissions
             requestPermissions(PERMISSIONS_REQUIRED, PERMISSIONS_REQUEST_CODE)
         } else {
             // If permissions have already been granted, proceed
-            navigateToCamera()
+               // NEXT_SCREEN = NEXT_LIST
+                navigateToCamera()
+              //  return;
         }
+    }
+
+   override fun onResume() {
+
+       super.onResume()
+
+      // Toast.makeText(context, "On Resume", Toast.LENGTH_LONG).show()
+
+       if( NEXT_SCREEN == NEXT_LIST ){
+           NEXT_SCREEN = NEXT_CAMERA
+           findNavController().navigate(R.id.action_cameraPermissionsFragment_to_listFragment);
+           return;
+       }
+
     }
 
     override fun onRequestPermissionsResult(
@@ -50,19 +72,22 @@ class CameraPermissionsFragment : Fragment() {
        findNavController().navigate(R.id.action_cameraPermissionsFragment_to_cameraFragment)
     }
 
-    companion object {
-
-        /** Convenience method used to check if all permissions required by this app are granted */
-        fun hasPermissions(context: Context) = PERMISSIONS_REQUIRED.all {
-            ContextCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
-        }
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_camera_permissions, container, false)
     }
 
+    companion object {
 
+        val NEXT_CAMERA = 1;
+        val NEXT_LIST = 0;
+
+        var NEXT_SCREEN   = 1;
+
+        /** Convenience method used to check if all permissions required by this app are granted */
+        fun hasPermissions(context: Context) = PERMISSIONS_REQUIRED.all {
+            ContextCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
+        }
+    }
 }

@@ -37,6 +37,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.MimeTypeMap
 import android.widget.ImageButton
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
 import androidx.camera.core.AspectRatio
 import androidx.camera.core.Camera
@@ -160,9 +161,7 @@ class CameraFragment : Fragment() {
         //broadcastManager.unregisterReceiver(volumeDownReceiver)
         displayManager.unregisterDisplayListener(displayListener)
 
-        requireActivity().onBackPressedDispatcher.addCallback(this) {
-            findNavController().navigate(R.id.action_cameraFragment_to_listFragment)
-        }
+
 
     }
 
@@ -193,6 +192,9 @@ class CameraFragment : Fragment() {
     @SuppressLint("MissingPermission")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        CameraPermissionsFragment.NEXT_SCREEN = CameraPermissionsFragment.NEXT_LIST;
+
         container = view as ConstraintLayout
         viewFinder = container.findViewById(R.id.pvCamera)
 
