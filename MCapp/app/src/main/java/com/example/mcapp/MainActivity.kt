@@ -26,8 +26,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-
-        /** Use external media if it is available, our app's file directory otherwise */
+        // NOTE Get storage directory
         fun getOutputDirectory(context: Context): File {
             val appContext = context.applicationContext
             val mediaDir = context.externalMediaDirs.firstOrNull()?.let {

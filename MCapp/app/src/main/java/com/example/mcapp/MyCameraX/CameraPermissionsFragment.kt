@@ -23,28 +23,17 @@ class CameraPermissionsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        if( NEXT_SCREEN == NEXT_LIST ){
-//            NEXT_SCREEN = NEXT_CAMERA
-//            findNavController().navigate(R.id.action_cameraPermissionsFragment_to_listFragment);
-//            return;
-//        }
-
         if (!hasPermissions(requireContext())) {
-            // Request camera-related permissions
+
             requestPermissions(PERMISSIONS_REQUIRED, PERMISSIONS_REQUEST_CODE)
         } else {
-            // If permissions have already been granted, proceed
-               // NEXT_SCREEN = NEXT_LIST
                 navigateToCamera()
-              //  return;
         }
     }
 
    override fun onResume() {
 
        super.onResume()
-
-      // Toast.makeText(context, "On Resume", Toast.LENGTH_LONG).show()
 
        if( NEXT_SCREEN == NEXT_LIST ){
            NEXT_SCREEN = NEXT_CAMERA

@@ -63,5 +63,5 @@ dependencies {
 
     // CameraX Extensions library
     // implementation 'androidx.camera:camera-extensions:1.0.0-alpha20'
-//ENDNOTE NOTE Camera
+//ENDNOTE Camera dependencies
 }

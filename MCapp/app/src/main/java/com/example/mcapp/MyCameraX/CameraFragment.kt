@@ -36,6 +36,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.MimeTypeMap
+import android.widget.Button
 import android.widget.ImageButton
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
@@ -63,6 +64,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.mcapp.MainActivity
 import com.example.mcapp.MyCameraX.CameraPermissionsFragment
 import com.example.mcapp.R
+import kotlinx.android.synthetic.main.fragment_camera.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
@@ -359,28 +361,28 @@ class CameraFragment : Fragment() {
         return AspectRatio.RATIO_16_9
     }
 
-    /** Method used to re-draw the camera UI controls, called every time configuration changes. */
+//    /** Method used to re-draw the camera UI controls, called every time configuration changes. */
 //    private fun updateCameraUi() {
 //
-//        // Remove previous UI if any
-//        container.findViewById<ConstraintLayout>(R.id.camera_ui_container)?.let {
-//            container.removeView(it)
-//        }
-//
-//        // Inflate a new view containing all UI for controlling the camera
-//        val controls = View.inflate(requireContext(), R.layout.camera_ui_container, container)
-//
-//        // In the background, load latest photo taken (if any) for gallery thumbnail
-//        lifecycleScope.launch(Dispatchers.IO) {
-//            outputDirectory.listFiles { file ->
-//                EXTENSION_WHITELIST.contains(file.extension.toUpperCase(Locale.ROOT))
-//            }?.max()?.let {
-//                setGalleryThumbnail(Uri.fromFile(it))
-//            }
-//        }
+////        // Remove previous UI if any
+////        container.findViewById<ConstraintLayout>(R.id.camera_ui_container)?.let {
+////            container.removeView(it)
+////        }
+////
+////        // Inflate a new view containing all UI for controlling the camera
+////        val controls = View.inflate(requireContext(), R.layout.camera_ui_container, container)
+////
+////        // In the background, load latest photo taken (if any) for gallery thumbnail
+////        lifecycleScope.launch(Dispatchers.IO) {
+////            outputDirectory.listFiles { file ->
+////                EXTENSION_WHITELIST.contains(file.extension.toUpperCase(Locale.ROOT))
+////            }?.max()?.let {
+////                setGalleryThumbnail(Uri.fromFile(it))
+////            }
+////        }
 //
 //        // Listener for button used to capture photo
-//        controls.findViewById<ImageButton>(R.id.camera_capture_button).setOnClickListener {
+//       btCapture.setOnClickListener {
 //
 //            // Get a stable reference of the modifiable image capture use case
 //            imageCapture?.let { imageCapture ->
@@ -414,7 +416,7 @@ class CameraFragment : Fragment() {
 //                            // We can only change the foreground Drawable using API level 23+ API
 //                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 //                                // Update the gallery thumbnail with latest picture taken
-//                                setGalleryThumbnail(savedUri)
+//                              //  setGalleryThumbnail(savedUri)
 //                            }
 //
 //                            // Implicit broadcasts will be ignored for devices running API level >= 24

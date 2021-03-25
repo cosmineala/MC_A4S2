@@ -35,10 +35,8 @@
     <uses-feature android:name="android.hardware.screen.portrait" />
 
 <!-- NOTE Camera Permissions -->
-    <!-- Declare features -->
     <uses-feature android:name="android.hardware.camera.any" />
 
-    <!-- Declare permissions -->
     <uses-permission android:name="android.permission.CAMERA" />
 <!--ENDNOTE-->
 
