@@ -48,7 +48,7 @@
         tools:layout="@layout/fragment_camera" />
     <fragment
         android:id="@+id/wifiFragment"
-        android:name="com.example.mcapp.WifiFragment"
+        android:name="com.example.mcapp.Wifi.WifiFragment"
         android:label="fragment_wifi"
         tools:layout="@layout/fragment_wifi" />
 </navigation>
