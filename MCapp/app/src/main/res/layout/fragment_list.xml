@@ -22,7 +22,7 @@
 
         android:contentDescription="Opens Sensors Activity"
         android:scaleType="fitXY"
-        android:src="@drawable/sensors_icon_1_v2"
+        android:src="@drawable/sensors_icon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,5 +40,21 @@
         android:src="@drawable/camera_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/wifi_icon"
+
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/white"
+        android:contentDescription="Opens wifi fragment"
+        android:scaleType="fitXY"
+        android:src="@drawable/wifi_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sensor_icon" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

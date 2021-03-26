@@ -29,6 +29,10 @@ class ListFragment : Fragment() {
             findNavController().navigate(R.id.action_listFragment_to_cameraPermissionsFragment)
         }
 
+        view.wifi_icon.setOnClickListener {
+           // findNavController().navigate(R.id.)
+        }
+
         // Inflate the layout for this fragment
         return view
     }

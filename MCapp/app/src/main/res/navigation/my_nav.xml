@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_listFragment_to_cameraPermissionsFragment"
             app:destination="@id/cameraPermissionsFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_wifiFragment"
+            app:destination="@id/wifiFragment" />
     </fragment>
     <fragment
         android:id="@+id/cameraPermissionsFragment"
@@ -43,4 +46,9 @@
         android:name="com.example.mcapp.MyCameraX.CameraFragment"
         android:label="fragment_camera"
         tools:layout="@layout/fragment_camera" />
+    <fragment
+        android:id="@+id/wifiFragment"
+        android:name="com.example.mcapp.WifiFragment"
+        android:label="fragment_wifi"
+        tools:layout="@layout/fragment_wifi" />
 </navigation>
