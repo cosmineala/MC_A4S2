@@ -9,11 +9,7 @@
         android:id="@+id/sensorsFragment"
         android:name="com.example.mcapp.Sensors.SensorsFragment"
         android:label="Sensors"
-        tools:layout="@layout/fragment_sensors" >
-        <action
-            android:id="@+id/action_sensorsFragment_to_listFragment"
-            app:destination="@id/listFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_sensors" />
     <fragment
         android:id="@+id/listFragment"
         android:name="com.example.mcapp.List.ListFragment"

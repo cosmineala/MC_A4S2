@@ -28,7 +28,6 @@ class WifiFragment : Fragment() {
 
         updateConnectionsUiStatus( view);
 
-
         view.btWifiOptions.setOnClickListener {
             val panelIntent = Intent(Settings.Panel.ACTION_WIFI)
             startActivityForResult(panelIntent, 1);
@@ -51,7 +50,6 @@ class WifiFragment : Fragment() {
                 delay(500)
             }
         }
-        
 
         return view
     }
@@ -84,7 +82,6 @@ class WifiFragment : Fragment() {
        }else{
            Toast.makeText(view.context, "No Data divicer", Toast.LENGTH_LONG ).show();
        }
-
 
    }
 
