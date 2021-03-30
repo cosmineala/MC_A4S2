@@ -191,6 +191,16 @@ class CameraFragment : Fragment() {
 //        }
 //    }
 
+    override fun onStop() {
+        super.onStop()
+        displayManager.unregisterDisplayListener(displayListener)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        displayManager.registerDisplayListener(displayListener, null)
+    }
+
     @SuppressLint("MissingPermission")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
