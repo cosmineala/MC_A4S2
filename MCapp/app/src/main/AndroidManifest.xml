@@ -3,6 +3,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.mcapp">
 
+<!--NOTE Maps permissions -->
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the "MyLocation" functionality.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<!--ENDNOTE-->
+
+<!-- NOTE Portrait mode lock -->
+    <uses-feature android:name="android.hardware.screen.portrait" /><!-- ENDNOTE -->
+<!-- NOTE Sensors permissions -->
+    <uses-feature
+        android:name="android.hardware.sensor.gyroscope"
+        android:required="true"
+        tools:ignore="ManifestOrder" />
+    <uses-feature
+        android:name="android.hardware.sensor.accelerometer"
+        android:required="true"
+        tools:ignore="ManifestOrder" /> <!-- ENDNOTE -->
+<!-- NOTE Camera Permissions -->
+    <uses-feature android:name="android.hardware.camera.any" />
+
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- ENDNOTE -->
+<!-- NOTE Network permissions (used for wifi monitoring) -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,6 +41,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MCapp">
+
+<!-- NOTE Maps   -->
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+<!-- ENDNOTE -->
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,36 +64,5 @@
             </intent-filter>
         </activity>
     </application>
-
-//<!-- NOTE Portrait mode lock-->
-    <uses-feature android:name="android.hardware.screen.portrait" />
-<!-- ENDNOTE-->
-
-<!-- NOTE Sensors permissions-->
-    <uses-feature
-        android:name="android.hardware.sensor.gyroscope"
-        android:required="true"
-        tools:ignore="ManifestOrder" />
-
-    <uses-feature
-        android:name="android.hardware.sensor.accelerometer"
-        android:required="true"
-        tools:ignore="ManifestOrder" />
-<!--ENDNOTE-->
-
-
-
-<!-- NOTE Camera Permissions -->
-    <uses-feature android:name="android.hardware.camera.any" />
-
-    <uses-permission android:name="android.permission.CAMERA" />
-<!--ENDNOTE-->
-
-<!-- NOTE Network permissions (used for wifi monitoring)-->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-<!-- ENDNOTE-->
 
 </manifest>

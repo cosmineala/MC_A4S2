@@ -33,6 +33,10 @@ class ListFragment : Fragment() {
            findNavController().navigate(R.id.action_listFragment_to_wifiFragment)
         }
 
+        view.maps_icon.setOnClickListener {
+            findNavController().navigate(R.id.action_listFragment_to_mapsFragment)
+        }
+
         // Inflate the layout for this fragment
         return view
     }
