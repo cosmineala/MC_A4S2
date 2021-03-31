@@ -15,8 +15,8 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.mcapp.R
 
-private const val PERMISSIONS_REQUEST_CODE = 10
-private val PERMISSIONS_REQUIRED = arrayOf(Manifest.permission.CAMERA)
+const val PERMISSIONS_REQUEST_CODE = 10
+val PERMISSIONS_REQUIRED = arrayOf(Manifest.permission.CAMERA)
 
 class CameraPermissionsFragment : Fragment() {
 

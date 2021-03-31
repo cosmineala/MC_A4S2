@@ -26,7 +26,11 @@
 <!-- NOTE Camera Permissions -->
     <uses-feature android:name="android.hardware.camera.any" />
 
-    <uses-permission android:name="android.permission.CAMERA" /> <!-- ENDNOTE -->
+    <uses-feature android:name="android.hardware.camera"  />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+<!-- ENDNOTE -->
+
 <!-- NOTE Network permissions (used for wifi monitoring) -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
