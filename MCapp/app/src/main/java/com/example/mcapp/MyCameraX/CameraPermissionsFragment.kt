@@ -10,13 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.mcapp.R
 
-const val PERMISSIONS_REQUEST_CODE = 10
-val PERMISSIONS_REQUIRED = arrayOf(Manifest.permission.CAMERA)
 
 class CameraPermissionsFragment : Fragment() {
 
@@ -25,7 +21,7 @@ class CameraPermissionsFragment : Fragment() {
 
         if (!hasPermissions(requireContext())) {
 
-            requestPermissions(PERMISSIONS_REQUIRED, PERMISSIONS_REQUEST_CODE)
+            requestPermissions(PERMISSIONS_REQUIRED_CAMERA, PERMISSIONS_REQUEST_CAMERA_CODE)
         } else {
                 navigateToCamera()
         }
@@ -46,7 +42,7 @@ class CameraPermissionsFragment : Fragment() {
     override fun onRequestPermissionsResult(
             requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == PERMISSIONS_REQUEST_CODE) {
+        if (requestCode == PERMISSIONS_REQUEST_CAMERA_CODE) {
             if (PackageManager.PERMISSION_GRANTED == grantResults.firstOrNull()) {
                 // Take the user to the success fragment when permission is granted
                 Toast.makeText(context, "Permission request granted", Toast.LENGTH_LONG).show()
@@ -74,8 +70,11 @@ class CameraPermissionsFragment : Fragment() {
 
         var NEXT_SCREEN   = 1;
 
+        val PERMISSIONS_REQUEST_CAMERA_CODE = 10
+        val PERMISSIONS_REQUIRED_CAMERA = arrayOf(Manifest.permission.CAMERA)
+
         /** Convenience method used to check if all permissions required by this app are granted */
-        fun hasPermissions(context: Context) = PERMISSIONS_REQUIRED.all {
+        fun hasPermissions(context: Context) = PERMISSIONS_REQUIRED_CAMERA.all {
             ContextCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
         }
     }

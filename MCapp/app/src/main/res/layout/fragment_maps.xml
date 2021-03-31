@@ -16,14 +16,15 @@
     tools:context=".Maps.MapsFragment" />
 
     <Button
-        android:id="@+id/btMapAddIcon"
+        android:id="@+id/btCanAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
         android:layout_marginBottom="30dp"
-        android:text="Button"
+        android:text="add: ON"
+        android:textColor="#00FF00"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/mapView" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
