@@ -25,14 +25,16 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment
         mapFragment.getMapAsync(this)
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-        val sydney = LatLng(-34.0, 151.0)
-        googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
+        val craiova = LatLng(44.31, 23.80)
+        googleMap.addMarker(MarkerOptions().position(craiova).title("Marker in Craiova") )
+        googleMap.animateCamera( CameraUpdateFactory.newLatLngZoom ( craiova, 12.3F ) )
     }
 }
