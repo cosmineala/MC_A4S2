@@ -66,12 +66,19 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         this.googleMap = googleMap;
 
         googleMap.animateCamera( CameraUpdateFactory.newLatLngZoom ( craiova, 12.3F ) )
-        googleMap.addMarker(MarkerOptions().position(craiova).title("Craiova Lat:" + craiova.latitude + " Lng:" + craiova.longitude ))
+
+        googleMap.addMarker(MarkerOptions()
+                .position(craiova)
+                .title("Craiova Lat:" + craiova.latitude + " Lng:" + craiova.longitude ))
 
         googleMap.setOnMapClickListener { clickLatLng ->
             if ( canAddMarker ) {
                 launchCamera()
-                mark = googleMap.addMarker(MarkerOptions().position(clickLatLng).title("Lat: " + roundZecimals( clickLatLng.latitude, 4) + " Lng:" + roundZecimals( clickLatLng.longitude, 4) ))
+                mark = googleMap.addMarker(MarkerOptions()
+                        .position(clickLatLng)
+                        .title(
+                                "Lat: " + roundZecimals( clickLatLng.latitude, 4) +
+                                " Lng:" + roundZecimals( clickLatLng.longitude, 4) ))
             }
         }
     }
