@@ -9,7 +9,8 @@ namespace WebAppMC.Controllers
 {
     // https://localhost:44364/WeatherForecast      // Local adress
     // https://192.168.5.65:44364/WeatherForecast   // Phizic device adres
-    // https://localhost:10.0.2.2/WeatherForecast   // Virtual divice adress
+
+    // http://10.0.2.2:51080/WeatherForecast   // Virtual divice adress
 
     [ApiController]
     [Route("[controller]")]
