@@ -7,10 +7,15 @@ using System.Threading.Tasks;
 
 namespace WebAppMC.Controllers
 {
-    // https://localhost:44364/WeatherForecast      // Local adress
-    // https://192.168.5.65:44364/WeatherForecast   // Phizic device adres
+    // HTTPS :
+        // https://localhost:44364/WeatherForecast      // Local Host
+        // https://192.168.5.65:44364/WeatherForecast   // LAN
+        // https://10.0.2.2:44364/WeatherForecast       // Emulator
 
-    // http://10.0.2.2:51080/WeatherForecast   // Virtual divice adress
+    // HTTP :
+        // http://localhost:51080/WeatherForecast      // Local Host
+        // http://192.168.5.65:51080/WeatherForecast   // LAN
+        // http://10.0.2.2:51080/WeatherForecast       // Emulator
 
     [ApiController]
     [Route("[controller]")]
@@ -31,20 +36,15 @@ namespace WebAppMC.Controllers
         [HttpGet]
         public WeatherForecast Get()
         {
-            var rng = new Random();
-            return new WeatherForecast { Date = DateTime.Now, TemperatureC = rng.Next(-20, 55), Summary = Summaries[rng.Next(Summaries.Length)] };
+            var random = new Random();
+
+            return new WeatherForecast { 
+                Date = DateTime.Now,
+                TemperatureC = random.Next(-20, 55),
+                Summary = Summaries[random.Next(Summaries.Length)]
+            };
         }
 
-        //public IEnumerable<WeatherForecast> Get()
-        //{
-        //    var rng = new Random();
-        //    return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-        //    {
-        //        Date = DateTime.Now.AddDays(index),
-        //        TemperatureC = rng.Next(-20, 55),
-        //        Summary = Summaries[rng.Next(Summaries.Length)]
-        //    })
-        //    .ToArray();
-        //}
+
     }
 }
