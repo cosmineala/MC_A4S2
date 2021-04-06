@@ -37,7 +37,11 @@ class ListFragment : Fragment() {
             findNavController().navigate(R.id.action_listFragment_to_mapsFragment)
         }
 
-        // Inflate the layout for this fragment
+        view.api_icon.setOnClickListener {
+            findNavController().navigate(R.id.action_listFragment_to_apiFragment)
+        }
+
+
         return view
     }
 
