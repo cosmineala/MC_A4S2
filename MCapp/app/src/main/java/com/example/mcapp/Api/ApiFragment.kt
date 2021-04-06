@@ -15,48 +15,45 @@ import kotlinx.android.synthetic.main.fragment_api.view.*
 
 class ApiFragment : Fragment() {
 
-
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//
-//    }
-
     private lateinit var myView: View
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
         myView = inflater.inflate(R.layout.fragment_api, container, false)
 
-
-        internrt()
-
         return myView
     }
 
-    fun internrt(){
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        val textView = myView.tvApiTitle
+        DEMO_API()
+    }
 
 
-// Instantiate the RequestQueue.
-        val queue = Volley.newRequestQueue(context )
-        //var url = "https://www.google.com/"
-       val url = "https://10.0.2.2:44364/WeatherForecast"
-        val urlTest = "https://jsonplaceholder.typicode.com/todos/1"
+    fun DEMO_API(){
 
-// Request a string response from the provided URL.
-        val josnRequest = JsonObjectRequest( Request.Method.GET, url, null,
-            { response ->
-                val resSum = response.toString()
-                textView.text = resSum;
-            },
-            {
-                textView.text = "That didn't work!"
-            })
+        val exampleUrl = "http://jsonplaceholder.typicode.com/todos/1"
+        val urlEEmulator = "http://10.0.2.2:51080/WeatherForecast"
+        val urlLan = "http://192.168.5.65:51080/WeatherForecast"
 
-// Add the request to the RequestQueue.
-        queue.add(josnRequest)
+        val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, urlLan, null,
+                { response ->
+                    myView.tvApiTitle.text = "Response:\n" + response.toString()
+                },
+                { error ->
+                    val er =  error.toString()
+                    myView.tvApiTitle.text = error.toString() + " Cause:" + error.cause.toString() + " NR: " + error.networkResponse
+                }
+        )
+
+        HttpSingleton.getInstance( requireContext() ).addToRequestQueue(jsonObjectRequest)
     }
 
 
