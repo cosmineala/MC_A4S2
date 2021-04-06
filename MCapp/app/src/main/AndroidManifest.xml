@@ -47,7 +47,15 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MCapp">
+        android:theme="@style/Theme.MCapp"
+
+        android:usesCleartextTraffic="true"
+        >
+<!-- NOTE :  -->
+    <!-- android:usesCleartextTraffic="true" -->
+    <!-- Used to alow HTTP trafic -->
+
+
 
 <!-- NOTE Maps   -->
         <!--
