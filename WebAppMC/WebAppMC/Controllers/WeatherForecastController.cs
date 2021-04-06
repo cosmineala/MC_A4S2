@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace WebAppMC.Controllers
 {
+    // https://localhost:44364/WeatherForecast      // Local adress
+    // https://192.168.5.65:44364/WeatherForecast   // Phizic device adres
+    // https://localhost:10.0.2.2/WeatherForecast   // Virtual divice adress
+
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
@@ -24,16 +28,22 @@ namespace WebAppMC.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public WeatherForecast Get()
         {
             var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+            return new WeatherForecast { Date = DateTime.Now, TemperatureC = rng.Next(-20, 55), Summary = Summaries[rng.Next(Summaries.Length)] };
         }
+
+        //public IEnumerable<WeatherForecast> Get()
+        //{
+        //    var rng = new Random();
+        //    return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        //    {
+        //        Date = DateTime.Now.AddDays(index),
+        //        TemperatureC = rng.Next(-20, 55),
+        //        Summary = Summaries[rng.Next(Summaries.Length)]
+        //    })
+        //    .ToArray();
+        //}
     }
 }
