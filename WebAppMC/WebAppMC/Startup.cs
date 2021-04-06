@@ -44,7 +44,8 @@ namespace WebAppMC
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAppMC v1"));
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
+            app.UseHttpMethodOverride();
 
             app.UseRouting();
 
