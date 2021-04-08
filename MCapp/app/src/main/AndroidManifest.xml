@@ -71,11 +71,14 @@
             android:value="@string/google_maps_key" />
 <!-- ENDNOTE -->
 
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:windowSoftInputMode="adjustResize"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"
-                        android:screenOrientation="portrait" />
-
+                        android:screenOrientation="portrait"
+                    />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
