@@ -38,6 +38,13 @@ class ChatFragment : Fragment() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        adapter.SetData(messagesViewModel.mesagesList);
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -81,7 +88,6 @@ class ChatFragment : Fragment() {
                 if (  messagesViewModel.mesagesList.size != lastSize ) {
 
                     adapter.SetData(messagesViewModel.mesagesList);
-
 
 
                     recyclerView.scrollToPosition(messagesViewModel.mesagesList.size - 1)
