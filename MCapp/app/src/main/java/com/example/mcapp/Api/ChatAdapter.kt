@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.item_message.view.*
 
 class ChatAdapter( val chatFragment: ChatFragment ): RecyclerView.Adapter<ChatAdapter.MyViewHolder>() {
 
-    var mesagesList =  emptyList<Message_Model>()
+    var mesagesList =  emptyList<Message>()
 
     class MyViewHolder( itemView: View): RecyclerView.ViewHolder(itemView){}
 
@@ -33,7 +33,7 @@ class ChatAdapter( val chatFragment: ChatFragment ): RecyclerView.Adapter<ChatAd
     }
 
 
-    fun SetData( list: List<Message_Model> ){
+    fun SetData( list: List<Message> ){
         this.mesagesList = list
         notifyDataSetChanged()
     }

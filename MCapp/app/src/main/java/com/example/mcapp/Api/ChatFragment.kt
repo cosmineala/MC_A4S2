@@ -23,13 +23,13 @@ import com.microsoft.signalr.HubConnectionState
 import kotlinx.android.synthetic.main.fragment_chat.view.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.*
 
 
 class ChatFragment : Fragment() {
 
     lateinit var recyclerView: RecyclerView
 
-    val mesagesList =  mutableListOf<Message_Model>()
 
     lateinit var messagesViewModel: MessagesViewModel
 
@@ -65,7 +65,7 @@ class ChatFragment : Fragment() {
 
             val message = view.etEditText.text.toString()
 
-            messagesViewModel.sendMessage( Message_Model( messagesViewModel.myName, message ) )
+            messagesViewModel.sendMessage( Message( id = UUID.randomUUID() , sender =  messagesViewModel.myName,  content = message ) )
 
             view.etEditText.text.clear()
 

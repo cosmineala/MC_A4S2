@@ -15,7 +15,7 @@ class MessagesViewModel( application: Application) : AndroidViewModel(applicatio
 
     val EMU = "http://10.0.2.2:51080/hub1"
 
-    var mesagesList: MutableList<Message_Model>
+    var mesagesList: MutableList<Message>
 
     val DNS = getApplication<Application>().resources.getString( R.string.MyDNS )
     val HttpPort = "51111"
@@ -27,7 +27,7 @@ class MessagesViewModel( application: Application) : AndroidViewModel(applicatio
 
     init{
 
-        mesagesList = mutableListOf<Message_Model>()
+        mesagesList = mutableListOf<Message>()
 
         configureMessagesHub( messagesHub )
         messagesHub.start()
@@ -48,13 +48,13 @@ class MessagesViewModel( application: Application) : AndroidViewModel(applicatio
 
 
 
-    fun addMesage( messageModel: Message_Model ){
+    fun addMesage( message: Message ){
 
-        mesagesList.add( messageModel )
+        mesagesList.add( message )
 
     }
 
-    fun sendMessage( message: Message_Model ){
+    fun sendMessage( message: Message ){
 
         viewModelScope.launch(Dispatchers.IO){
 
@@ -66,7 +66,7 @@ class MessagesViewModel( application: Application) : AndroidViewModel(applicatio
                 delay( max )
             }
 
-            messagesHub.send("SendToAll", message.sender , message.content)
+            messagesHub.send("SendToAll", message )
 
         }
 
@@ -77,11 +77,11 @@ class MessagesViewModel( application: Application) : AndroidViewModel(applicatio
 
         hubConnection.on(
                 "ReciveAll",
-                { user, cotaint ->
+                { message ->
 
-                addMesage( Message_Model( sender = user, content = cotaint  ) )
+                addMesage( message )
 
-                }, String::class.java, String::class.java
+                }, Message::class.java
         )
 
     }
