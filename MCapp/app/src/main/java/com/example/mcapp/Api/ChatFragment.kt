@@ -45,6 +45,12 @@ class ChatFragment : Fragment() {
 
     }
 
+    override fun onPause() {
+        super.onPause()
+
+        messagesViewModel.sendMessage( Message( id = UUID.randomUUID() , sender =  messagesViewModel.myName ,  content = "Left Chat" ) )
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -58,14 +64,17 @@ class ChatFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
+
         messagesViewModel = ViewModelProvider( requireActivity() ).get( MessagesViewModel::class.java )
+
+        messagesViewModel.sendMessage( Message( id = UUID.randomUUID() , sender =  messagesViewModel.myName ,  content = "Joined Chat" ) )
 
 
         view.btSubmitMessage.setOnClickListener {
 
             val message = view.etEditText.text.toString()
 
-            messagesViewModel.sendMessage( Message( id = UUID.randomUUID() , sender =  messagesViewModel.myName,  content = message ) )
+            messagesViewModel.sendMessage( Message( id = UUID.randomUUID() , sender =  messagesViewModel.myName ,  content = message ) )
 
             view.etEditText.text.clear()
 

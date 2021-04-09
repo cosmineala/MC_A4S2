@@ -14,7 +14,7 @@
         android:layout_marginTop="10dp"
         android:text="USERNAME"
         android:textSize="30sp"
-        android:textColor="@color/teal_700"
+        android:textColor="@android:color/holo_green_dark"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,5 +28,15 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvMessageSender" />
+
+    <View
+        android:id="@+id/vbSeparator"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/purple_500"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvMessageContent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

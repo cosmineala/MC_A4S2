@@ -1,5 +1,6 @@
 package com.example.mcapp.Api
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +24,15 @@ class ChatAdapter( val chatFragment: ChatFragment ): RecyclerView.Adapter<ChatAd
         val currentItem = mesagesList[position]
 
         holder.itemView.apply {
-            tvMessageSender.text = currentItem.sender
+
+            if ( chatFragment.messagesViewModel.myName == currentItem.sender )
+            {
+                tvMessageSender.setTextColor( Color.GREEN )
+            }else{
+                tvMessageSender.setTextColor( Color.RED )
+            }
+
+            tvMessageSender.text = currentItem.sender + ":"
             tvMessageContent.text = currentItem.content
         }
     }
