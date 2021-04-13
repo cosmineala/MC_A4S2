@@ -17,11 +17,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mcapp.R
+import com.google.android.gms.common.api.internal.LifecycleActivity
 import com.microsoft.signalr.HubConnection
 import com.microsoft.signalr.HubConnectionBuilder
 import com.microsoft.signalr.HubConnectionState
 import kotlinx.android.synthetic.main.fragment_chat.view.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -58,54 +61,31 @@ class ChatFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_chat, container, false)
 
-
-        adapter = ChatAdapter( this,  )
         recyclerView = view.rvChat
+
+        adapter = ChatAdapter( this, recyclerView )
+
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
 
         messagesViewModel = ViewModelProvider( requireActivity() ).get( MessagesViewModel::class.java )
-
         messagesViewModel.sendMessage( Message( id = UUID.randomUUID() , sender =  messagesViewModel.myName ,  content = "Joined Chat" ) )
-
 
         view.btSubmitMessage.setOnClickListener {
 
             val message = view.etEditText.text.toString()
-
             messagesViewModel.sendMessage( Message( id = UUID.randomUUID() , sender =  messagesViewModel.myName ,  content = message ) )
-
             view.etEditText.text.clear()
-
-            //val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            //imm.hideSoftInputFromWindow(view.windowToken, 0)
 
         }
 
-//        messagesViewModel.liveChange.observe( viewLifecycleOwner, Observer {
-//            adapter.SetData( messagesViewModel.mesagesList )
-//            recyclerView.scrollToPosition( messagesViewModel.mesagesList.size - 1 )
-//        } )
 
-        lifecycleScope.launch {
-
-            var lastSize = messagesViewModel.mesagesList.size
-
-            while(true){
-
-                if (  messagesViewModel.mesagesList.size != lastSize ) {
-
-                    adapter.SetData(messagesViewModel.mesagesList);
-
-
-                    recyclerView.scrollToPosition(messagesViewModel.mesagesList.size - 1)
-                    lastSize =  messagesViewModel.mesagesList.size
-                }
-
-                delay(300);
+        lifecycleScope.launch{
+            messagesViewModel.OnMessagesListChanged().collect {
+                adapter.SetData( it );
+                recyclerView.scrollToPosition(it.size - 1)
             }
-
         }
 
 

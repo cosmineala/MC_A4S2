@@ -75,4 +75,10 @@ dependencies {
 // ENDNOTE
 
     implementation 'com.microsoft.signalr:signalr:1.0.0'
+
+
+    // NOTE For coroutines and Flow
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
+    //ENDNOTE
 }

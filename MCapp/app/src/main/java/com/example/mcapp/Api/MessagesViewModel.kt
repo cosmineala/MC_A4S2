@@ -1,91 +1,57 @@
 package com.example.mcapp.Api
 
 import android.app.Application
-import android.widget.Toast
 import androidx.lifecycle.*
-import com.example.mcapp.R
-import com.microsoft.signalr.HubConnection
-import com.microsoft.signalr.HubConnectionBuilder
-import com.microsoft.signalr.HubConnectionState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class MessagesViewModel( application: Application) : AndroidViewModel(application) {
 
-    val EMU = "http://10.0.2.2:51080/hub1"
+    val messagesHub = MessagesHub( application, this )
 
-    var mesagesList: MutableList<Message>
-
-    val DNS = getApplication<Application>().resources.getString( R.string.MyDNS )
-    val HttpPort = "51111"
-    val URL = "http://" + DNS + ":" + HttpPort + "/hub1"
-
-    val messagesHub: HubConnection = HubConnectionBuilder.create( URL ).build()
+    val mesagesList = mutableListOf<Message>()
 
     var myName = ""
 
-    init{
-
-        mesagesList = mutableListOf<Message>()
-
-        configureMessagesHub( messagesHub )
-        messagesHub.start()
-
-        viewModelScope.launch{
-
-            while( messagesHub.connectionState != HubConnectionState.CONNECTED ){
-
-                Toast.makeText( application, "!!! Not conecteeed", Toast.LENGTH_SHORT ).show()
-                //messagesHub.start()
-                delay(5000);
-            }
-
-            Toast.makeText( application, "Conecteeed !!!", Toast.LENGTH_SHORT ).show()
-
-        }
-    }
-
-
-
     fun addMesage( message: Message ){
 
-        mesagesList.add( message )
+        try {
 
+            viewModelScope.launch( Dispatchers.IO ) {
+                mesagesList.add(message)
+            }
+        }catch ( e: Exception){
+
+        }
     }
 
     fun sendMessage( message: Message ){
+        viewModelScope.launch( Dispatchers.IO ) {
+            messagesHub.sendMessage( message )
+        }
+    }
 
-        viewModelScope.launch(Dispatchers.IO){
+    suspend fun OnMessagesListChanged() : Flow<List<Message>> = flow {
 
-            var max = 100L
+        var lastMessagesListSize = mesagesList.size
 
-            while ( messagesHub.connectionState != HubConnectionState.CONNECTED && max -- > 0 )
-            {
-                messagesHub.start()
-                delay( max )
+        while ( true ){
+            if ( mesagesList.size != lastMessagesListSize ){
+                emit( mesagesList )
+                lastMessagesListSize = mesagesList.size
             }
-
-            messagesHub.send("SendToAll", message )
-
+            delay( DELAY_CHAT_UPDATE)
         }
 
-
     }
 
-    fun configureMessagesHub( hubConnection: HubConnection ){
+    companion object{
 
-        hubConnection.on(
-                "ReciveAll",
-                { message ->
-
-                addMesage( message )
-
-                }, Message::class.java
-        )
-
+        val DELAY_CHAT_UPDATE = 300L
     }
-
-
 
 }

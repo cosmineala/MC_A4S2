@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mcapp.R
 import kotlinx.android.synthetic.main.item_message.view.*
 
-class ChatAdapter( val chatFragment: ChatFragment ): RecyclerView.Adapter<ChatAdapter.MyViewHolder>() {
+class ChatAdapter( val chatFragment: ChatFragment, val recyclerView: RecyclerView ): RecyclerView.Adapter<ChatAdapter.MyViewHolder>() {
 
     var mesagesList =  emptyList<Message>()
 
