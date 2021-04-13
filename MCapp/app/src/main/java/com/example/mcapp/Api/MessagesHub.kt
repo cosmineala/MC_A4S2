@@ -27,6 +27,7 @@ class MessagesHub( val application: Application, val messagesViewModel: Messages
 
     lateinit var messagesHub: HubConnection
 
+
     init {
         startHub()
     }
@@ -134,6 +135,7 @@ class MessagesHub( val application: Application, val messagesViewModel: Messages
 
         val DELAY_CONNECT_ATEMPT_1 = 1000L
         val DELAY_CONNECT_ATEMPT_2 = 5000L
+
     }
 
 }

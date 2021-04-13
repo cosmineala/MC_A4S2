@@ -38,17 +38,20 @@ class ApiFragment : Fragment() {
 
         messagesViewModel = ViewModelProvider( requireActivity() ).get( MessagesViewModel::class.java )
 
+        myView.etEnterName.setText( messagesViewModel.getUsername() )
+
         myView.btEnterChat.setOnClickListener {
 
             val name = myView.etEnterName.text.toString()
 
             if ( name != "" ) {
-                messagesViewModel.myName = name
+                messagesViewModel.setUsername( name )
 
                 if (messagesViewModel.messagesHub.IsConnected()) {
 
                     val keyboard = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     keyboard.hideSoftInputFromWindow(view.windowToken, 0)
+
                     findNavController().navigate(R.id.action_apiFragment_to_chatFragment)
                 }
                 else
@@ -71,7 +74,6 @@ class ApiFragment : Fragment() {
 
 
 
-
         }
 
 
@@ -80,7 +82,7 @@ class ApiFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        myView.etEnterName.setText( messagesViewModel.myName )
+        myView.etEnterName.setText( messagesViewModel.getUsername() )
     }
 
 

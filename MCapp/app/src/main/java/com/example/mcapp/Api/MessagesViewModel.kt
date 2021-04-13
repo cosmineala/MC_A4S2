@@ -1,37 +1,65 @@
 package com.example.mcapp.Api
 
 import android.app.Application
+import android.content.SharedPreferences
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
-class MessagesViewModel( application: Application) : AndroidViewModel(application) {
 
-    val messagesHub = MessagesHub( application, this )
+class MessagesViewModel(application: Application) : AndroidViewModel(application) {
+
+    val messagesHub = MessagesHub(application, this)
 
     val mesagesList = mutableListOf<Message>()
 
-    var myName = ""
 
-    fun addMesage( message: Message ){
+    var onMessagesListChanged: IExecutable
 
-        try {
 
-            viewModelScope.launch( Dispatchers.IO ) {
-                mesagesList.add(message)
+    var userPreferences: SharedPreferences
+
+    init {
+        onMessagesListChanged = object : IExecutable{
+            override fun execute(list: List<Message>) {
+                //Toast.makeText( application, "! IExecutable onMessagesListChanged runde without being defined", Toast.LENGTH_SHORT ).show()
             }
-        }catch ( e: Exception){
 
         }
+
+        userPreferences = application.getSharedPreferences("UserInfo", 0)
     }
 
-    fun sendMessage( message: Message ){
-        viewModelScope.launch( Dispatchers.IO ) {
-            messagesHub.sendMessage( message )
+    fun getUsername(): String{
+        return userPreferences.getString("Username", "").toString()
+
+    }
+    fun setUsername(name: String){
+        val editor = userPreferences.edit()
+        editor.putString("Username", name)
+        editor.apply()
+    }
+
+    fun addMesage(message: Message){
+
+        viewModelScope.launch(Dispatchers.IO) {
+            mesagesList.add(message)
+
+            viewModelScope.launch(Dispatchers.Main) {
+                onMessagesListChanged.execute(mesagesList);
+
+            }
+        }
+
+
+    }
+
+    fun sendMessage(message: Message){
+        viewModelScope.launch(Dispatchers.IO) {
+            messagesHub.sendMessage(message)
         }
     }
 
@@ -41,10 +69,10 @@ class MessagesViewModel( application: Application) : AndroidViewModel(applicatio
 
         while ( true ){
             if ( mesagesList.size != lastMessagesListSize ){
-                emit( mesagesList )
+                emit(mesagesList)
                 lastMessagesListSize = mesagesList.size
             }
-            delay( DELAY_CHAT_UPDATE)
+            delay(DELAY_CHAT_UPDATE)
         }
 
     }
@@ -52,6 +80,10 @@ class MessagesViewModel( application: Application) : AndroidViewModel(applicatio
     companion object{
 
         val DELAY_CHAT_UPDATE = 300L
+
+        interface IExecutable{
+            fun execute(list: List<Message>)
+        }
     }
 
 }

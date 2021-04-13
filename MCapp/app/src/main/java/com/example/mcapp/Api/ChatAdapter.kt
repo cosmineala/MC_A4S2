@@ -25,7 +25,7 @@ class ChatAdapter( val chatFragment: ChatFragment, val recyclerView: RecyclerVie
 
         holder.itemView.apply {
 
-            if ( chatFragment.messagesViewModel.myName == currentItem.sender )
+            if ( chatFragment.messagesViewModel.getUsername() == currentItem.sender )
             {
                 tvMessageSender.setTextColor( Color.GREEN )
             }else{
@@ -42,8 +42,12 @@ class ChatAdapter( val chatFragment: ChatFragment, val recyclerView: RecyclerVie
     }
 
 
-    fun SetData( list: List<Message> ){
-        this.mesagesList = list
+    fun SetData(newList: List<Message> ){
+        mesagesList = newList
         notifyDataSetChanged()
+    }
+
+    fun smoothScrollDown(){
+        recyclerView.smoothScrollToPosition( mesagesList.size - 1 )
     }
 }
