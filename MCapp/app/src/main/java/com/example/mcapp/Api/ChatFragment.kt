@@ -21,7 +21,7 @@ class ChatFragment : Fragment() {
 
     lateinit var chatRecyclerView: RecyclerView
 
-
+    lateinit var chatAdapter: ChatAdapter
     lateinit var messagesViewModel: MessagesViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +32,9 @@ class ChatFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        chatAdapter.SetData(messagesViewModel.mesagesList);
+        messagesViewModel.sendMessage(Message(id = UUID.randomUUID(), sender = messagesViewModel.getUsername(), content = "Joined Chat"))
+        //chatAdapter.SetData(messagesViewModel.mesagesList);
+
 
     }
 
@@ -57,7 +59,7 @@ class ChatFragment : Fragment() {
         chatRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         messagesViewModel = ViewModelProvider(requireActivity()).get(MessagesViewModel::class.java)
-        messagesViewModel.sendMessage(Message(id = UUID.randomUUID(), sender = messagesViewModel.getUsername(), content = "Joined Chat"))
+
 
         view.btSubmitMessage.setOnClickListener {
 
@@ -84,14 +86,8 @@ class ChatFragment : Fragment() {
         }
 
 
-
         return view
     }
 
 
-    companion object {
-
-        lateinit var chatAdapter: ChatAdapter
-
-    }
 }
