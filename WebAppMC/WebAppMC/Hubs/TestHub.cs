@@ -17,7 +17,7 @@ namespace WebAppMC.Hubs
 
             string conId = Context.ConnectionId;
 
-            System.Diagnostics.Debug.WriteLine( "Call: SendToALL | ConID: 21" + conId + " | ID: " + message.ID + " | Sender: " + message.Sender + " | message: " + message.Content);
+            System.Diagnostics.Debug.WriteLine( "Call: SendToALL | ConID: " + conId + " | ID: " + message.ID + " | Sender: " + message.Sender + " | message: " + message.Content);
         }
 
         public async Task SendToOthers(Message message)
