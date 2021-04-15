@@ -3,11 +3,14 @@ package com.example.mcapp.Api
 import android.app.Application
 import android.content.SharedPreferences
 import androidx.lifecycle.*
+import com.example.mcapp.Cryptography.Crypto
+import com.example.mcapp.Cryptography.Hash
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
+import kotlin.random.Random
 
 
 class MessagesViewModel(application: Application) : AndroidViewModel(application) {
@@ -19,8 +22,10 @@ class MessagesViewModel(application: Application) : AndroidViewModel(application
 
     var onMessagesListChanged: IExecutable
 
-
     var userPreferences: SharedPreferences
+
+    val crypto: Crypto = Crypto()
+
 
     init {
         onMessagesListChanged = object : IExecutable{
@@ -32,6 +37,7 @@ class MessagesViewModel(application: Application) : AndroidViewModel(application
 
         userPreferences = application.getSharedPreferences("UserInfo", 0)
     }
+
 
     fun getUsername(): String{
         return userPreferences.getString("Username", "").toString()
@@ -84,6 +90,44 @@ class MessagesViewModel(application: Application) : AndroidViewModel(application
         interface IExecutable{
             fun execute(list: List<Message>)
         }
+    }
+
+
+    fun TestAes( input: String ): String{
+
+        val random = Random.nextInt(0,100)
+
+        val key = "tp6EbnrwJGwrcjV3KpyqdmCysA2nSg=="
+        val randomKey = crypto.aesNewKey()
+
+        val randomSeed =  Hash.md5String(  random.toString() )
+        val seed = "20"
+
+        val encText = crypto.aesEncrypt( input, key, randomSeed )
+        val decText = crypto.aesDecrypt( encText, key, randomSeed )
+
+        val message = "Key: " + key + "\n\nEnc: " + encText + "\n\nDec: " + decText
+
+
+        return message
+    }
+
+    fun TestRSA( input: String ): String{
+
+        val keyPair = crypto.rsaNewKey()
+
+        val encText = crypto.rsaEncryptWithPublic( input, keyPair.public )
+
+        val decText = crypto.rsaDecryptWithPrivate( encText, keyPair.private )
+
+        val message = "Private: " + keyPair.private.toString() +
+                "\n\nPubluc: " + keyPair.public.toString() +
+                "\n\nEnc: " + encText +
+                "\n\nDec: " + decText
+
+        print( message )
+
+        return message
     }
 
 }

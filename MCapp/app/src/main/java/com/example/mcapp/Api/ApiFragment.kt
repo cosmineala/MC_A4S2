@@ -44,6 +44,8 @@ class ApiFragment : Fragment() {
 
             val name = myView.etEnterName.text.toString()
 
+            //TestEncryption()
+
             if ( name != "" ) {
                 messagesViewModel.setUsername( name )
 
@@ -83,6 +85,14 @@ class ApiFragment : Fragment() {
         super.onResume()
 
         myView.etEnterName.setText( messagesViewModel.getUsername() )
+    }
+
+    fun TestEncryption(){
+
+        //val testAes = messagesViewModel.TestAes( myView.etEnterName.text.toString() )
+        val testRsa = messagesViewModel.TestRSA( myView.etEnterName.text.toString() )
+
+        myView.tvCrypto.setText( testRsa )
     }
 
 

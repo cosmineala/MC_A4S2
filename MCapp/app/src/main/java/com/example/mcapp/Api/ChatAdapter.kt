@@ -6,10 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mcapp.Cryptography.Hash
 import com.example.mcapp.R
 import kotlinx.android.synthetic.main.item_recived_message.view.*
-import java.math.BigInteger
-import java.security.MessageDigest
 
 
 class ChatAdapter(val chatFragment: ChatFragment, val recyclerView: RecyclerView): RecyclerView.Adapter<ChatAdapter.MyViewHolder>() {
@@ -107,7 +106,7 @@ class ChatAdapter(val chatFragment: ChatFragment, val recyclerView: RecyclerView
 
         fun generateColor(name: String): Int{
 
-            val hash = md5(name)
+            val hash = Hash.md5String(name)
             val A = 0xFF
 
             var lot = hash.take(5)
@@ -125,10 +124,7 @@ class ChatAdapter(val chatFragment: ChatFragment, val recyclerView: RecyclerView
         }
 
 
-        fun md5(input: String): String {
-            val md = MessageDigest.getInstance("MD5")
-            return BigInteger(1, md.digest(input.toByteArray())).toString(16).padStart(32, '0')
-        }
+
 
     }
 
