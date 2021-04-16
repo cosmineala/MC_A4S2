@@ -64,8 +64,11 @@ class ChatFragment : Fragment() {
         view.btSubmitMessage.setOnClickListener {
 
             val message = view.etEditText.text.toString()
-            messagesViewModel.sendMessage(Message(id = UUID.randomUUID(), sender = messagesViewModel.getUsername(), content = message))
-            view.etEditText.text.clear()
+
+            if ( message != "" ) {
+                messagesViewModel.sendMessage(Message(id = UUID.randomUUID(), sender = messagesViewModel.getUsername(), content = message))
+                view.etEditText.text.clear()git
+            }
 
         }
 

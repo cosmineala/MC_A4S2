@@ -52,6 +52,7 @@ class MessagesViewModel(application: Application) : AndroidViewModel(application
     fun addMesage(message: Message){
 
         viewModelScope.launch(Dispatchers.IO) {
+
             mesagesList.add(message)
 
             viewModelScope.launch(Dispatchers.Main) {

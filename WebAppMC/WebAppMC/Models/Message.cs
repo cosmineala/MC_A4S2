@@ -10,5 +10,6 @@ namespace WebAppMC.Models
         public Guid ID { get; set; }
         public String Sender { get; set; }
         public String Content { get; set; }
+        public String Seed { get; set; }
     }
 }

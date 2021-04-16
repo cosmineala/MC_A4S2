@@ -4,6 +4,7 @@ import android.app.Application
 import android.widget.Toast
 
 import androidx.lifecycle.viewModelScope
+import com.example.mcapp.Cryptography.Crypto
 import com.example.mcapp.R
 import com.microsoft.signalr.HubConnection
 import com.microsoft.signalr.HubConnectionBuilder
@@ -26,6 +27,8 @@ class MessagesHub( val application: Application, val messagesViewModel: Messages
     val URL = "http://" + DNS + ":" + HttpPort + "/hub1"
 
     lateinit var messagesHub: HubConnection
+
+    val crypto = Crypto()
 
 
     init {
@@ -53,7 +56,9 @@ class MessagesHub( val application: Application, val messagesViewModel: Messages
 
         messagesHub.on(
                 "ReciveAll",
-                { message ->
+                { encryptedMessage ->
+
+                    val message = crypto.aesDecrypt( encryptedMessage, AES_KEY )
 
                     messagesViewModel.addMesage( message )
 
@@ -88,9 +93,11 @@ class MessagesHub( val application: Application, val messagesViewModel: Messages
 
     fun sendMessage( message: Message ){
 
+        val encrypteedMessage = crypto.aesEncrypt( message, AES_KEY )
+
         if (IsConnected())
         {
-            messagesHub.send("SendToAll", message)
+            messagesHub.send("SendToAll", encrypteedMessage)
         }
         else
         {
@@ -132,6 +139,8 @@ class MessagesHub( val application: Application, val messagesViewModel: Messages
     }
 
     companion object {
+
+        val AES_KEY = "tp6EbnrwJGwrcjV3KpyqdmCysA2nSg=="
 
         val DELAY_CONNECT_ATEMPT_1 = 1000L
         val DELAY_CONNECT_ATEMPT_2 = 5000L

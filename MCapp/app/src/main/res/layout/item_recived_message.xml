@@ -6,25 +6,38 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tvMessageSender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:text="USERNAME"
-        android:textColor="@android:color/holo_green_dark"
-        android:textSize="25sp"
+    <View
+        android:id="@+id/vSideBar"
+        android:layout_width="10dp"
+        android:layout_height="0dp"
+        android:background="@color/teal_700"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/tvMessageSender"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="5dp"
+        android:text="USERNAME"
+        android:textColor="@android:color/holo_green_dark"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/vSideBar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/tvMessageContent"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
+        android:layout_marginEnd="5dp"
         android:text="MESSAGE CONTEENT"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/vSideBar"
         app:layout_constraintTop_toBottomOf="@+id/tvMessageSender" />
 
 

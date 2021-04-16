@@ -54,15 +54,19 @@ class ChatAdapter(val chatFragment: ChatFragment, val recyclerView: RecyclerView
 
         holder.itemView.apply {
 
+            val color = generateColor(currentItem.sender)
+
             if( messageNeedsHead(position) )
             {
                 tvMessageSender.isVisible = true
-                tvMessageSender.setTextColor(generateColor(currentItem.sender))
+                tvMessageSender.setTextColor( color )
                 tvMessageSender.text = currentItem.sender + ":"
             }else
             {
                 tvMessageSender.isVisible = false
             }
+
+            vSideBar.setBackgroundColor( color )
 
             tvMessageContent.text = currentItem.content
         }

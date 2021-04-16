@@ -1,5 +1,6 @@
 package com.example.mcapp.Cryptography
 
+import com.example.mcapp.Api.Message
 import java.io.ByteArrayOutputStream
 import java.security.*
 import java.util.*
@@ -10,9 +11,26 @@ import javax.crypto.spec.SecretKeySpec
 class Crypto() {
 
 // NOTE AES
+
+    fun aesNewKey() = AES256.newKey()
+    fun aesNewIV() = AES256.newIV()
+
     fun aesEncrypt(v: String, secretKey: String, seed: String ) = AES256.encrypt(v, secretKey, seed)
     fun aesDecrypt(v: String, secretKey: String, seed: String ) = AES256.decrypt(v, secretKey, seed)
-    fun aesNewKey() = AES256.newKey()
+
+    fun aesEncrypt( messagee: Message, key: String): Message{
+
+        val iv = aesNewIV()
+        val encryptedText = aesEncrypt( messagee.content, key, iv )
+
+        return Message( id = messagee.id, sender = messagee.sender, content = encryptedText, seed = iv )
+    }
+    fun aesDecrypt(encryptedMessagee: Message, key: String): Message{
+
+        val text = aesDecrypt( encryptedMessagee.content, key, encryptedMessagee.seed )
+
+        return Message( id = encryptedMessagee.id, sender = encryptedMessagee.sender, content = text, seed = encryptedMessagee.seed )
+    }
 
 // NOTE RSA
     fun rsaNewKey() = RSA.generateKey()
@@ -23,12 +41,20 @@ class Crypto() {
     fun rsaDecryptWithPrivate( input: String, privateKey: PrivateKey ) = RSA.decryptByPrivateKey( input, privateKey )
     fun rsaDecryptWithPublic(  input: String, publicKey: PublicKey  ) = RSA.decryptByPublicKey( input, publicKey)
 
+
     private object AES256{
 
         fun newKey(): String{
             val key = ByteArray(22)
             SecureRandom().nextBytes(key)
             return String(encorder.encode(key))
+        }
+
+        fun newIV(): String{
+
+            val random = Random()
+            val seed = Hash.md5String( random.nextDouble().toString() )
+            return seed
         }
 
         private fun cipher(opmode:Int, secretKey:String, seed: String):Cipher{

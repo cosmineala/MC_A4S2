@@ -13,11 +13,7 @@ namespace WebAppMC.Hubs
         {
             Clients.All.SendAsync("ReciveAll", message);
 
-            //Clients.Others.SendAsync("ReciveAll", message);
-
-            string conId = Context.ConnectionId;
-
-            System.Diagnostics.Debug.WriteLine( "Call: SendToALL | ConID: " + conId + " | ID: " + message.ID + " | Sender: " + message.Sender + " | message: " + message.Content);
+            System.Diagnostics.Debug.WriteLine( "<HubLog> ID: " + message.ID + " | Sender: " + message.Sender + " | Seed: " + message.Seed + " | message: " + message.Content);
         }
 
         public async Task SendToOthers(Message message)
