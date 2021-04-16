@@ -67,7 +67,7 @@ class ChatFragment : Fragment() {
 
             if ( message != "" ) {
                 messagesViewModel.sendMessage(Message(id = UUID.randomUUID(), sender = messagesViewModel.getUsername(), content = message))
-                view.etEditText.text.clear()git
+                view.etEditText.text.clear()
             }
 
         }
