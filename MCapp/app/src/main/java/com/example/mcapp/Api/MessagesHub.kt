@@ -28,27 +28,22 @@ class MessagesHub( val application: Application, val messagesViewModel: Messages
 
     lateinit var messagesHub: HubConnection
 
+    val connectionBuilder = HubConnectionBuilder.create( URL )
+
     val crypto = Crypto()
 
 
     init {
+        connectionBuilder.withHandshakeResponseTimeout( DELAY_CONNECT_ATEMPT_1 + DELAY_CONNECT_ATEMPT_2 )
         startHub()
     }
 
     fun startHub( ){
 
-        messagesHub = HubConnectionBuilder.create( URL ).build()
+        messagesHub = connectionBuilder.build()
 
         configureHubMethods()
-
-        messagesHub.onClosed {
-
-            messagesHub.stop()
-            SendToast("!!!Disconnected!!!");
-            startHub()
-
-        }
-
+        configureOnCLose()
         connectAsync()
     }
 
@@ -66,6 +61,16 @@ class MessagesHub( val application: Application, val messagesViewModel: Messages
         )
     }
 
+    fun configureOnCLose(){
+        messagesHub.onClosed {
+
+            messagesHub.stop()
+            SendToast("!!!Disconnected!!!");
+            startHub()
+
+        }
+    }
+
     fun connectAsync(){
 
         hubScope.launch(Dispatchers.IO) {
@@ -75,17 +80,24 @@ class MessagesHub( val application: Application, val messagesViewModel: Messages
 
             if ( messagesHub.connectionState == HubConnectionState.CONNECTED)
             {
-                SendToast("<<<Connected>>>");
+                SendToast("<<<Connected-1>>>");
             }
             else
             {
                 delay( DELAY_CONNECT_ATEMPT_2 )
                 if ( messagesHub.connectionState == HubConnectionState.CONNECTED)
                 {
-                    SendToast("<<<Connected>>>");
+                    SendToast("<<<Connected-2>>>");
                 }else
                 {
-                    startHub()
+                    delay( DELAY_CONNECT_ATEMPT_1 );
+                    while ( messagesHub.connectionState == HubConnectionState.DISCONNECTED )
+                    {
+                        messagesHub.start()
+                        delay(DELAY_CONNECT_ATEMPT_2)
+                    }
+                    SendToast("<<<Connected-3>>>");
+                    //startHub()
                 }
             }
         }
