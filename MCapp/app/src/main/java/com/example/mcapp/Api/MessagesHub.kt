@@ -34,7 +34,7 @@ class MessagesHub( val application: Application, val messagesViewModel: Messages
 
 
     init {
-        connectionBuilder.withHandshakeResponseTimeout( DELAY_CONNECT_ATEMPT_1 + DELAY_CONNECT_ATEMPT_2 )
+        connectionBuilder.withHandshakeResponseTimeout( DELAY_CONNECT_CANCEL )
         startHub()
     }
 
@@ -75,31 +75,18 @@ class MessagesHub( val application: Application, val messagesViewModel: Messages
 
         hubScope.launch(Dispatchers.IO) {
 
-            messagesHub.start()
-            delay( DELAY_CONNECT_ATEMPT_1 );
+                messagesHub.start() 
+                delay(DELAY_CONNECT_ATEMPT_1)
 
-            if ( messagesHub.connectionState == HubConnectionState.CONNECTED)
-            {
-                SendToast("<<<Connected-1>>>");
-            }
-            else
-            {
-                delay( DELAY_CONNECT_ATEMPT_2 )
-                if ( messagesHub.connectionState == HubConnectionState.CONNECTED)
+            while ( messagesHub.connectionState == HubConnectionState.DISCONNECTED )
                 {
-                    SendToast("<<<Connected-2>>>");
-                }else
-                {
-                    delay( DELAY_CONNECT_ATEMPT_1 );
-                    while ( messagesHub.connectionState == HubConnectionState.DISCONNECTED )
-                    {
-                        messagesHub.start()
-                        delay(DELAY_CONNECT_ATEMPT_2)
-                    }
-                    SendToast("<<<Connected-3>>>");
-                    //startHub()
+                    messagesHub.start()
+                    delay(DELAY_CONNECT_ATEMPT_1)
                 }
-            }
+                SendToast("<<<Connected>>>");
+                //startHub()
+
+
         }
     }
 
@@ -154,8 +141,9 @@ class MessagesHub( val application: Application, val messagesViewModel: Messages
 
         val AES_KEY = "tp6EbnrwJGwrcjV3KpyqdmCysA2nSg=="
 
-        val DELAY_CONNECT_ATEMPT_1 = 1000L
+        val DELAY_CONNECT_ATEMPT_1 = 3000L
         val DELAY_CONNECT_ATEMPT_2 = 5000L
+        val DELAY_CONNECT_CANCEL = 500L
 
     }
 

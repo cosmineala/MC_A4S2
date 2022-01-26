@@ -2,11 +2,14 @@ package com.example.mcapp
 
 import android.content.Context
 import android.content.pm.ActivityInfo
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.google.firebase.iid.FirebaseInstanceId
 import java.io.File
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(findNavController(R.id.fragment))
 
     }
+
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.fragment)

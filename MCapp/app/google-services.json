@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "859466983576",
+    "project_id": "radiant-snow-309301",
+    "storage_bucket": "radiant-snow-309301.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:859466983576:android:49796bab3c08bf578c88ed",
+        "android_client_info": {
+          "package_name": "com.example.mcapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "859466983576-t0vnfm89pe6n9ds5dccck4t2d2880d5m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCG2UlIu9j0gRjnCfrieEAwgzqctgVaNC0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "859466983576-t0vnfm89pe6n9ds5dccck4t2d2880d5m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

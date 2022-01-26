@@ -38,7 +38,6 @@ class MessagesViewModel(application: Application) : AndroidViewModel(application
         userPreferences = application.getSharedPreferences("UserInfo", 0)
     }
 
-
     fun getUsername(): String{
         return userPreferences.getString("Username", "").toString()
 
